@@ -1,0 +1,528 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNCeRZz4jNi7Kh4UPI4mfH6",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/srivani47/EcoForecast-AI-Powered-Prediction-of-Carbon-Monoxide-Levels/blob/main/Assignments\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "m43VvfN2ozGE"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Create a pandas dataframe with numpy random values\n",
+        "data = np.random.randn(4, 4)#4 rows and 4 columns\n",
+        "df = pd.DataFrame(data)"
+      ],
+      "metadata": {
+        "id": "wByQ4wvZpADv"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Rename columns\n",
+        "df.columns = ['Random value 1', 'Random value 2', 'Random value 3', 'Random value 4']"
+      ],
+      "metadata": {
+        "id": "T1cscSp5pGdM"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.head()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 175
+        },
+        "id": "u12EIapDpHWd",
+        "outputId": "2ed968a3-d4b1-44ef-c6a7-d9b5d6e57b6d"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "   Random value 1  Random value 2  Random value 3  Random value 4\n",
+              "0       -1.227646       -2.022182        0.805015       -0.572478\n",
+              "1        0.096687       -0.497120       -0.164412       -1.242106\n",
+              "2        0.525174       -1.373139        0.361568       -0.849885\n",
+              "3       -0.134508       -1.001241        1.486975       -0.059004"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-9c34d78e-2d9d-4f7d-88f9-3d02f9f322e9\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Random value 1</th>\n",
+              "      <th>Random value 2</th>\n",
+              "      <th>Random value 3</th>\n",
+              "      <th>Random value 4</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>-1.227646</td>\n",
+              "      <td>-2.022182</td>\n",
+              "      <td>0.805015</td>\n",
+              "      <td>-0.572478</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>0.096687</td>\n",
+              "      <td>-0.497120</td>\n",
+              "      <td>-0.164412</td>\n",
+              "      <td>-1.242106</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>0.525174</td>\n",
+              "      <td>-1.373139</td>\n",
+              "      <td>0.361568</td>\n",
+              "      <td>-0.849885</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>-0.134508</td>\n",
+              "      <td>-1.001241</td>\n",
+              "      <td>1.486975</td>\n",
+              "      <td>-0.059004</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-9c34d78e-2d9d-4f7d-88f9-3d02f9f322e9')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-9c34d78e-2d9d-4f7d-88f9-3d02f9f322e9 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-9c34d78e-2d9d-4f7d-88f9-3d02f9f322e9');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "<div id=\"df-766f90fe-cd24-4912-9443-a8447a5ddae5\">\n",
+              "  <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-766f90fe-cd24-4912-9443-a8447a5ddae5')\"\n",
+              "            title=\"Suggest charts\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "  </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "  <script>\n",
+              "    async function quickchart(key) {\n",
+              "      const quickchartButtonEl =\n",
+              "        document.querySelector('#' + key + ' button');\n",
+              "      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "      quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "      try {\n",
+              "        const charts = await google.colab.kernel.invokeFunction(\n",
+              "            'suggestCharts', [key], {});\n",
+              "      } catch (error) {\n",
+              "        console.error('Error during call to suggestCharts:', error);\n",
+              "      }\n",
+              "      quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "      quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "    }\n",
+              "    (() => {\n",
+              "      let quickchartButtonEl =\n",
+              "        document.querySelector('#df-766f90fe-cd24-4912-9443-a8447a5ddae5 button');\n",
+              "      quickchartButtonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "    })();\n",
+              "  </script>\n",
+              "</div>\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "variable_name": "df",
+              "summary": "{\n  \"name\": \"df\",\n  \"rows\": 4,\n  \"fields\": [\n    {\n      \"column\": \"Random value 1\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.7468498504572324,\n        \"min\": -1.227645612777104,\n        \"max\": 0.5251742498059209,\n        \"num_unique_values\": 4,\n        \"samples\": [\n          0.09668656053815443,\n          -0.13450780782535365,\n          -1.227645612777104\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"Random value 2\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.6422129328208497,\n        \"min\": -2.0221823458596617,\n        \"max\": -0.49712015797453574,\n        \"num_unique_values\": 4,\n        \"samples\": [\n          -0.49712015797453574,\n          -1.0012406148685749,\n          -2.0221823458596617\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"Random value 3\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.6995104079251719,\n        \"min\": -0.16441191379490436,\n        \"max\": 1.48697492112548,\n        \"num_unique_values\": 4,\n        \"samples\": [\n          -0.16441191379490436,\n          1.48697492112548,\n          0.8050152184895485\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"Random value 4\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.49733211436515967,\n        \"min\": -1.2421055855240475,\n        \"max\": -0.05900402910875843,\n        \"num_unique_values\": 4,\n        \"samples\": [\n          -1.2421055855240475,\n          -0.05900402910875843,\n          -0.5724779687671342\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Descriptive statistics\n",
+        "print(\"Descriptive Statistics:\")\n",
+        "print(df.describe())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jMf3y84kpJvF",
+        "outputId": "554ca033-c30a-4534-86fd-c7ca5a172dca"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Descriptive Statistics:\n",
+            "       Random value 1  Random value 2  Random value 3  Random value 4\n",
+            "count        4.000000        4.000000        4.000000        4.000000\n",
+            "mean        -0.185073       -1.223421        0.622287       -0.680868\n",
+            "std          0.746850        0.642213        0.699510        0.497332\n",
+            "min         -1.227646       -2.022182       -0.164412       -1.242106\n",
+            "25%         -0.407792       -1.535400        0.230073       -0.947940\n",
+            "50%         -0.018911       -1.187190        0.583292       -0.711182\n",
+            "75%          0.203808       -0.875211        0.975505       -0.444109\n",
+            "max          0.525174       -0.497120        1.486975       -0.059004\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Check for null values and data types\n",
+        "print(\"\\nNull Values:\")\n",
+        "print(df.isnull().sum())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aenKP8Y1pOPU",
+        "outputId": "f6321551-afef-4834-dfe8-35cab7bcad4f"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Null Values:\n",
+            "Random value 1    0\n",
+            "Random value 2    0\n",
+            "Random value 3    0\n",
+            "Random value 4    0\n",
+            "dtype: int64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"\\nData Types:\")\n",
+        "print(df.dtypes)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cKjR_XVFpT6l",
+        "outputId": "996cb8ec-fb92-42f4-f9ff-e671a4b4e84f"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Data Types:\n",
+            "Random value 1    float64\n",
+            "Random value 2    float64\n",
+            "Random value 3    float64\n",
+            "Random value 4    float64\n",
+            "dtype: object\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Display 'Random value 2' & 'Random value 3' columns with location method and index location method\n",
+        "print(\"\\nRandom value 2 column with location method:\")\n",
+        "print(df.loc[:, 'Random value 2'])\n",
+        "\n",
+        "print(\"\\nRandom value 3 column with location method:\")\n",
+        "print(df.loc[:, 'Random value 3'])\n",
+        "\n",
+        "print(\"\\nRandom value 2 column with index location method:\")\n",
+        "print(df.iloc[:, 1])\n",
+        "\n",
+        "print(\"\\nRandom value 3 column with index location method:\")\n",
+        "print(df.iloc[:, 2])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oOhlRP_OpWp6",
+        "outputId": "0d77a50c-effc-490b-e997-b115629973e1"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Random value 2 column with location method:\n",
+            "0   -2.022182\n",
+            "1   -0.497120\n",
+            "2   -1.373139\n",
+            "3   -1.001241\n",
+            "Name: Random value 2, dtype: float64\n",
+            "\n",
+            "Random value 3 column with location method:\n",
+            "0    0.805015\n",
+            "1   -0.164412\n",
+            "2    0.361568\n",
+            "3    1.486975\n",
+            "Name: Random value 3, dtype: float64\n",
+            "\n",
+            "Random value 2 column with index location method:\n",
+            "0   -2.022182\n",
+            "1   -0.497120\n",
+            "2   -1.373139\n",
+            "3   -1.001241\n",
+            "Name: Random value 2, dtype: float64\n",
+            "\n",
+            "Random value 3 column with index location method:\n",
+            "0    0.805015\n",
+            "1   -0.164412\n",
+            "2    0.361568\n",
+            "3    1.486975\n",
+            "Name: Random value 3, dtype: float64\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
