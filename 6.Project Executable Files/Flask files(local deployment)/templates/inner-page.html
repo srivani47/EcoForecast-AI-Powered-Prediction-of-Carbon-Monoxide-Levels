@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Monoxide Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Carbon Monoxide Prediction</h1>
+        <form action="/submit" method="post">
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year">
+            
+            <label for="month">Month:</label>
+            <input type="text" id="month" name="month">
+            
+            <label for="day">Day:</label>
+            <input type="text" id="day" name="day">
+            
+            <label for="hour">Hour:</label>
+            <input type="text" id="hour" name="hour">
+            
+            <label for="temperature">Temperature:</label>
+            <input type="text" id="temperature" name="temperature">
+            
+            <label for="humidity">Humidity:</label>
+            <input type="text" id="humidity" name="humidity">
+            
+
+            <input type="submit" value="Submit">
+        </form>
+        {{result}}
+    </div>
+</body>
+</html>
